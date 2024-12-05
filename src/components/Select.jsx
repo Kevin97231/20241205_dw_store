@@ -4,15 +4,23 @@ export const Select = ({ options = [], value, onChangeFunction, children }) => {
   };
 
   return (
-    <div className="m-auto">
+    <div className="flex justify-center items-center mx-auto my-4">
       <select
         value={value}
         onChange={handleSeclectChange}
-        className="w-full max-w-xs select select-bordered select-sm"
+        className="w-fit p-5 bg-primary text-secondary p-3 rounded-lg"
       >
-        <option disabled>{children}</option>
+        <option disabled className="text-gray-500">
+          {children}
+        </option>
         {options.map((option) => (
-          <option key={options.value}>{option.label}</option>
+          <option
+            key={option.value}
+            value={option.value}
+            className="text-black"
+          >
+            {option.label}
+          </option>
         ))}
       </select>
     </div>
