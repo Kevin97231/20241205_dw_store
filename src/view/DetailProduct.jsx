@@ -1,11 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useAxios } from "../hooks/useAxios";
 import { useEffect, useState } from "react";
 
 export const DetailProduct = () => {
   const params = useParams();
   const productId = params.id;
+
   const { getById } = useAxios();
+
+  const [searchParams] = useSearchParams();
+
+  const color = searchParams.get("color");
+  const size = searchParams.get("size");
+
+  console.log(color, size);
+  console.log("Id:", productId);
 
   const [product, setProduct] = useState();
 

@@ -36,7 +36,7 @@ export const useAxios = (baseUrl = "http://localhost:3001/products") => {
   const getById = (id) => handleRequest(axios.get, `${baseUrl}/${id}`);
 
   const getPaginate = () =>
-    handleRequest(axios.get, `?_page=${page}&_per_page=${perPage}`);
+    handleRequest(axios.get, `${baseUrl}/?_page=${page}&_per_page=${perPage}`);
 
   return {
     get,

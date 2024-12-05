@@ -12,8 +12,12 @@ function App() {
       children: [
         { path: "", element: <>Page d'accueil</> },
         { path: "/products", element: <Products /> },
+
+        // Si on a plusieurs paramètres mais qu'ils ne font pas partie de la structure principale de l'URL,
+        // on peut les transmettre sous forme de "query parameters". Ces paramètres sont ajoutés après ? dans l'URL et sont séparés par &.
+
+        // Exemple d'URL : "/products/123?color=red&size=M"
         { path: "/products/:id", element: <DetailProduct /> },
-        // AJOUTR EXEMPLe
         { path: "*", element: <>404 NOT FOUND</> },
       ],
     },
