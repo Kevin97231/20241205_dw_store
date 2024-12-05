@@ -1,9 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
 
-export const useAxios = (baseUrl = "http://localhost:3001/products") => {
+export const useAxios = () => {
   // export const useAxios = () => {
   // let baseUrl = "http://localhost:3001/products";
+
+  const url = "http://localhost:3001/products";
+
+  const api = axios.create({
+    baseURL: url,
+  });
+
+  api.interceptors.request.use(
+    (config) =>
+      new Promise((resolve) => setTimeout(() => resolve(config), 1200))
+  );
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,19 +35,20 @@ export const useAxios = (baseUrl = "http://localhost:3001/products") => {
     }
   };
 
-  const get = (endpoint) =>
-    handleRequest(axios.get, endpoint ? `${baseUrl}/${endpoint}` : baseUrl);
+  const get = (endpoint) => handleRequest(api.get, endpoint);
 
-  const remove = (id) => handleRequest(axios.delete, `${baseUrl}/${id}`);
+  const remove = (endpoint, id) =>
+    handleRequest(api.delete, `${endpoint}/${id}`);
 
-  const put = (id, data) => handleRequest(axios.put, `${baseUrl}/${id}`, data);
+  const put = (endpoint, id, data) =>
+    handleRequest(api.put, `${endpoint}/${id}`, data);
 
-  const post = (data) => handleRequest(axios.post, baseUrl, data);
+  const post = (endpoint, data) => handleRequest(api.post, endpoint, data);
 
-  const getById = (id) => handleRequest(axios.get, `${baseUrl}/${id}`);
+  const getById = (id) => handleRequest(api.get, `/${id}`);
 
   const getPaginate = () =>
-    handleRequest(axios.get, `${baseUrl}/?_page=${page}&_per_page=${perPage}`);
+    handleRequest(api.get, `/?_page=${page}&_per_page=${perPage}`);
 
   return {
     get,
