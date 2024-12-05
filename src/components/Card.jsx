@@ -1,4 +1,6 @@
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { addProduct } from "../features/product/cartSlice";
 
 /* eslint-disable react/prop-types */
 export const Card = ({ product }) => {
@@ -7,6 +9,8 @@ export const Card = ({ product }) => {
   const navigateToDetail = () => {
     navigate(`/products/${product.id}`);
   };
+
+  const dispatch = useDispatch();
 
   return (
     <div className="flex shadow-xl card bg-base-100 w-96">
@@ -25,6 +29,9 @@ export const Card = ({ product }) => {
             Voir
           </button>
           <Link to={`/products/${product.id}`}>Voir avec le Link</Link>
+          <button className="btn" onClick={() => dispatch(addProduct(product))}>
+            ajouter au panier
+          </button>
         </div>
       </div>
     </div>
