@@ -1,6 +1,8 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
+import { DetailProduct } from "./view/DetailProduct";
+import { Products } from "./view/Products";
 
 function App() {
   const router = createBrowserRouter([
@@ -9,7 +11,9 @@ function App() {
       element: <Root />,
       children: [
         { path: "", element: <>Page d'accueil</> },
-        { path: "/products", element: <>page products</> },
+        { path: "/products", element: <Products /> },
+        { path: "/products/:id", element: <DetailProduct /> },
+        // AJOUTR EXEMPLe
         { path: "*", element: <>404 NOT FOUND</> },
       ],
     },
