@@ -22,6 +22,9 @@ export const Navbar = () => {
             <li>
               <HeaderItem href={"/panier"}>Mon panier</HeaderItem>
             </li>
+            <li>
+              <HeaderItem href={"/tp-accessibility-1"}>tp</HeaderItem>
+            </li>
           </ul>
         </div>
       </nav>

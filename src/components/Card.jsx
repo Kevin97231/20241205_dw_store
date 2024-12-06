@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addProduct, deleteProduct } from "../features/product/cartSlice";
 import PropTypes from "prop-types";
+import { ButtonAccessible } from "./ButtonAccessible";
 
 /* eslint-disable react/prop-types */
 export const Card = ({ product }) => {
@@ -35,12 +36,9 @@ export const Card = ({ product }) => {
           </button>
           <Link to={`/products/${product.id}`}>Voir avec le Link</Link>
           {!isInCart ? (
-            <button
-              className="btn"
-              onClick={() => dispatch(addProduct(product))}
-            >
-              ajouter au panier
-            </button>
+            <ButtonAccessible handleClick={() => dispatch(addProduct(product))}>
+              Ajouter au panier
+            </ButtonAccessible>
           ) : (
             <button
               className="btn btn-error"

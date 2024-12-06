@@ -6,6 +6,7 @@ import { Products } from "./view/Products";
 import { CounterRedux } from "./view/CounterRedux";
 import { Cart } from "./components/Cart";
 import { HomePage } from "./view/HomePage";
+import { TpAccessibility } from "./view/TpAccessibility";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,6 +19,7 @@ function App() {
         { path: "/products", element: <Products /> },
         { path: "/counter-redux", element: <CounterRedux /> },
         { path: "/panier", element: <Cart /> },
+        { path: "/tp-accessibility-1", element: <TpAccessibility /> },
 
         // Si on a plusieurs paramètres mais qu'ils ne font pas partie de la structure principale de l'URL,
         // on peut les transmettre sous forme de "query parameters". Ces paramètres sont ajoutés après ? dans l'URL et sont séparés par &.
