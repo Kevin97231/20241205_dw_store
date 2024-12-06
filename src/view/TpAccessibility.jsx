@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { ButtonAccessible } from "../components/ButtonAccessible";
+import AccessibleModal from "../components/AccessibleModal";
 
 export const TpAccessibility = () => {
   const {
@@ -14,6 +16,10 @@ export const TpAccessibility = () => {
     setTodos([...todos, data]);
     reset();
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className="p-6 font-sans">
@@ -123,15 +129,23 @@ export const TpAccessibility = () => {
             )}
           </div>
 
-          <button
+          {/* <button
             type="submit"
             className="px-4 py-2 bg-primary text-primary-content rounded-md shadow hover:bg-primary-focus focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             aria-label="Ajouter une nouvelle tâche"
           >
             Ajouter
-          </button>
+          </button> */}
+
+          <ButtonAccessible arialabel={"Ajouter une nouvelle tâche"}>
+            Ajouter
+          </ButtonAccessible>
         </fieldset>
       </form>
+
+      <ButtonAccessible handleClick={openModal} arialabel={"ouvrir le modal"}>
+        Ouvrir le modal
+      </ButtonAccessible>
 
       {/* Liste des tâches */}
       <ul className="space-y-4">
@@ -151,6 +165,17 @@ export const TpAccessibility = () => {
           </li>
         ))}
       </ul>
+
+      <AccessibleModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Mon Modal accessible"
+      >
+        <p>
+          Voici le contenu de la modale. Vous pouvez appuyer sur ESC pour la
+          fermer.
+        </p>
+      </AccessibleModal>
     </div>
   );
 };

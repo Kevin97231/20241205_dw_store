@@ -4,8 +4,7 @@ export const ButtonAccessible = ({
   handleClick,
   children,
   styleType = "primary",
-  arialabel = "Button",
-  type = "button",
+  arialabel,
 }) => {
   // Mapping des styles DaisyUI pour différents types de boutons
   const buttonStyles = {
@@ -18,14 +17,13 @@ export const ButtonAccessible = ({
   };
 
   // Pourquoi le boutton est accessible ?
-  //   L'élément <button> est sémantiquement conçu pour être interactif.
+  //  L'élément <button> est sémantiquement conçu pour être interactif.
   // Les lecteurs d'écran reconnaissent automatiquement qu'il s'agit d'un bouton sans nécessiter de rôle explicite.
   // Il est également focusable et accessible via la navigation clavier par défaut.
   // L'élément <button> est accessible avec la touche Tab
 
   return (
     <button
-      type={type}
       onClick={handleClick}
       className={buttonStyles[styleType] || buttonStyles.primary}
       aria-label={arialabel}
@@ -37,7 +35,7 @@ export const ButtonAccessible = ({
 
 // PropTyps encore plus importante dans le cas d'élément générique
 ButtonAccessible.propTypes = {
-  handleClick: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   styleType: PropTypes.oneOf([
     "primary",
@@ -47,6 +45,5 @@ ButtonAccessible.propTypes = {
     "warning",
     "error",
   ]),
-  arialabel: PropTypes.string,
-  type: PropTypes.oneOf(["button", "submit", "reset"]),
+  arialabel: PropTypes.string.isRequired,
 };
