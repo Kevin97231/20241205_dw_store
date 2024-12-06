@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import { Card } from "./Card";
 import { SkeletonCard } from "./SkeletonCard";
+import PropTypes from "prop-types";
 
 export const ProductList = ({ products }) => {
   const array = Array.from({ length: 8 });
@@ -12,4 +12,14 @@ export const ProductList = ({ products }) => {
         : array.map((_, index) => <SkeletonCard key={index} />)}
     </div>
   );
+};
+
+ProductList.propTypes = {
+  // products: PropTypes.object.isRequired,
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      // Exemple d vérification dans le cas ou mon ID peut etre un string ou un numbre
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    })
+  ),
 };
