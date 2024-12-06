@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
@@ -6,14 +5,16 @@ import { DetailProduct } from "./view/DetailProduct";
 import { Products } from "./view/Products";
 import { CounterRedux } from "./view/CounterRedux";
 import { Cart } from "./components/Cart";
+import { HomePage } from "./view/HomePage";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Root />,
+      errorElement: <ErrorPage />,
       children: [
-        { path: "", element: <>Page d'accueil</> },
+        { path: "", element: <HomePage /> },
         { path: "/products", element: <Products /> },
         { path: "/counter-redux", element: <CounterRedux /> },
         { path: "/panier", element: <Cart /> },
@@ -42,3 +43,7 @@ function App() {
 }
 
 export default App;
+
+function ErrorPage() {
+  return <div>Oops ! Quelques chose s&apos;est mal passé</div>;
+}

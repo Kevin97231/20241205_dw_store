@@ -1,6 +1,6 @@
 import { PaginationButton } from "./PaginationButton";
 
-export const Pagination = ({ nbrButton = 0, handleClick }) => {
+export const Pagination = ({ nbrButton = 0, handleClick, loading }) => {
   //   Numbers sera un tableau de chiffre
   // Ex: si nbrButton = 5 ==> [1,2,3,4,5]
   const numbers = Array.from({ length: nbrButton }, (_, index) => index + 1);
@@ -12,6 +12,7 @@ export const Pagination = ({ nbrButton = 0, handleClick }) => {
           key={number}
           number={number}
           handleClick={handleClick}
+          loading={loading}
         />
       ))}
     </div>

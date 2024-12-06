@@ -14,7 +14,15 @@ export const cartSlice = createSlice({
         state.value.push(productToAdd);
       }
     },
+    deleteProduct: (state, action) => {
+      // Payload est l'id du produit à supprimer
+      const productIdToDelete = action.payload;
+
+      state.value = state.value.filter(
+        (product) => product.id !== productIdToDelete
+      );
+    },
   },
 });
-export const { addProduct } = cartSlice.actions;
+export const { addProduct, deleteProduct } = cartSlice.actions;
 export default cartSlice.reducer;

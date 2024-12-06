@@ -1,6 +1,7 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { addProduct } from "../features/product/cartSlice";
+import { addProduct, deleteProduct } from "../features/product/cartSlice";
+import PropTypes from "prop-types";
 
 /* eslint-disable react/prop-types */
 export const Card = ({ product }) => {
@@ -11,6 +12,10 @@ export const Card = ({ product }) => {
   };
 
   const dispatch = useDispatch();
+
+  const products = useSelector((state) => state.cart.value);
+
+  const isInCart = products.some((item) => item.id === product.id);
 
   return (
     <div className="flex shadow-xl card bg-base-100 w-96">
@@ -29,11 +34,34 @@ export const Card = ({ product }) => {
             Voir
           </button>
           <Link to={`/products/${product.id}`}>Voir avec le Link</Link>
-          <button className="btn" onClick={() => dispatch(addProduct(product))}>
-            ajouter au panier
-          </button>
+          {!isInCart ? (
+            <button
+              className="btn"
+              onClick={() => dispatch(addProduct(product))}
+            >
+              ajouter au panier
+            </button>
+          ) : (
+            <button
+              className="btn btn-error"
+              onClick={() => dispatch(deleteProduct(product.id))}
+            >
+              Supprimer du panier
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
+};
+
+Card.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    title: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    image: PropTypes.string.isRequired,
+  }),
 };

@@ -5,7 +5,8 @@ import { Pagination } from "../components/Pagination";
 import { Select } from "../components/Select";
 
 export const Products = () => {
-  const { getPaginate, page, perPage, setPage, setPerPage } = useAxios();
+  const { getPaginate, page, perPage, setPage, setPerPage, loading } =
+    useAxios();
 
   const [products, setProducts] = useState([]);
   const [responseObject, setResponseObject] = useState({ pages: 0, items: 0 });
@@ -65,6 +66,7 @@ export const Products = () => {
         <Pagination
           nbrButton={responseObject.pages}
           handleClick={clickOnPaginationButton}
+          loading={loading}
         />
       </div>
     </div>
